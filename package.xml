@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>ccta2024_scalable</name>
-  <version>0.0.0</version>
+  <name>nebolab_gazebo_sim</name>
+  <version>0.1.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="8626150+mwsatman@users.noreply.github.com">localadmin</maintainer>
+  <maintainer email="8626150+mwsatman@users.noreply.github.com">mwsatman</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
@@ -14,10 +14,7 @@
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>signal</exec_depend>
   <exec_depend>numpy</exec_depend>
-  <exec_depend>pickle</exec_depend>
-  <exec_depend>threading</exec_depend>
   <exec_depend>cvxopt</exec_depend>
 
   <export>

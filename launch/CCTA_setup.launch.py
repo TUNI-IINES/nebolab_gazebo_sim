@@ -33,7 +33,7 @@ def generate_launch_description():
 
    
    converter = Node(
-      package='turtlebot3_gazebo',
+      package='nebolab_gazebo_sim',
       executable='sdf_convert.py',
       name='sdf_converter',
       parameters=[{'yaml_name': LaunchConfiguration('yaml_name')}],
@@ -42,12 +42,12 @@ def generate_launch_description():
 
    environment = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
-         get_package_share_directory('turtlebot3_gazebo'), 'launch'),
+         get_package_share_directory('nebolab_gazebo_sim'), 'launch'),
          '/totally_empty.launch.py'])
       )
 
    spawn = Node(
-      package='turtlebot3_gazebo',
+      package='nebolab_gazebo_sim',
       executable='spawn_turtlebot.py',
       name='entity_spawner',
       parameters=[{'yaml_name': LaunchConfiguration('yaml_name')}],
@@ -55,7 +55,7 @@ def generate_launch_description():
    
    
    vicon = Node(
-      package='turtlebot3_gazebo',
+      package='nebolab_gazebo_sim',
       executable='vicon_localization.py',
       name='vicon_localization'
       )

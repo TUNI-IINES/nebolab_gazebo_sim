@@ -24,7 +24,7 @@ import launch_ros.actions
 def generate_launch_description():
     return launch.LaunchDescription([
         launch_ros.actions.Node(
-            package='turtlebot3_gazebo',
+            package='nebolab_gazebo_sim',
             executable='expROS2_main.py',
             name='CCTA_FormationAvoidance'),
   ])
