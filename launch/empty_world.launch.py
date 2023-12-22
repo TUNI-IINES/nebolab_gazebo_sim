@@ -25,7 +25,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
-TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
+TURTLEBOT3_MODEL = os.environ.get('TURTLEBOT3_MODEL','burger')
 
 
 def generate_launch_description():

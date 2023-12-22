@@ -27,7 +27,8 @@ from launch.substitutions import PythonExpression
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.actions import Node
 
-TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
+TURTLEBOT3_MODEL = os.environ.get('TURTLEBOT3_MODEL','burger')
+
 def generate_launch_description():
     # Launch configuration variables specific to simulation
     robot_prefix = LaunchConfiguration('robot_prefix')
