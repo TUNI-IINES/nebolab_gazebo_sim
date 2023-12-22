@@ -2,13 +2,9 @@
 import os
 import rclpy
 from distutils.dir_util import copy_tree
+from ament_index_python.packages import get_package_share_directory
 import numpy as np
 from rclpy.node import Node
-
-SRC = "/home/dl/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/scripts/scenarios_unicycle/scenarios/"
-DST = '/home/dl/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models/'
-WLD = f"/home/dl/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/worlds/empty_worlds"
-# yaml_name = os.environ['YAML_NAME']
 
 description = 'This SDF file is for enlarging environment'
 
@@ -42,7 +38,7 @@ class converter(Node):
 
             
         self.get_logger().info(
-            'Convert evironment obstacle file')
+            'Convert environment obstacle file')
         with open(f'{src}{self.yaml_name}.yml', 'r') as file:
             import yaml
             scenario, _, _ = yaml.safe_load(file).values()
@@ -164,8 +160,12 @@ class converter(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-
-    node = converter(src=SRC, dst=DST, wld=WLD)
+    pkg_root = get_package_share_directory('nebolab_gazebo_sim')
+    scenarios_path = pkg_root + "/nebolab_gazebo_sim/scenarios_unicycle/scenarios/"
+    models_path = pkg_root + "/models/"
+    worlds_path = pkg_root + "/worlds/empty_worlds"
+    
+    node = converter(src=scenarios_path, dst=models_path, wld=worlds_path)
     try:
         rclpy.spin(node) 
     except KeyboardInterrupt:

@@ -8,19 +8,19 @@ from math import pi
 import numpy as np
 from functools import partial
 from tf_transformations import euler_from_quaternion
-from nebolab_experiment_setup import NebolabSetup
-from scenarios_unicycle.CCTA2024_Controller import SceneSetup
+from .scenarios_unicycle.CCTA2024_Controller import SceneSetup
 
 
 
 ROS_NODE_NAME = 'vicon_localization'
+TB_L_SI2UNI = 0.06
 
 class ViconLoc(Node):
 
     def __init__(self):
         super().__init__(ROS_NODE_NAME)
         self.robot_count = SceneSetup.robot_num
-        self.tb_l_si2uni = NebolabSetup.TB_L_SI2UNI
+        self.tb_l_si2uni = TB_L_SI2UNI
         self.pos_ahead_publishers = {}
         self.pos_center_publishers = {}
         self.pose_center = [Pose2D()]*self.robot_count
@@ -38,8 +38,8 @@ class ViconLoc(Node):
             self.pos_center_publishers[tb_name] = \
                 self.create_publisher(Pose2D, f'/{tb_name}/posc', 10)
             
-            # Create pose subscriber (Vicon)
-            self.get_logger().info(f'Creating Vicon subscriber: /vicon/{tb_name}/{tb_name}')
+            # Create pose subscriber (odom)
+            self.get_logger().info(f'Creating odom subscriber: /{tb_name}/odom')
 
             self.pose_sub = self.create_subscription(
                 Odometry,

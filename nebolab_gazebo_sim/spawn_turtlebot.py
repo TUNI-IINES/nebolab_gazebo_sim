@@ -14,10 +14,8 @@ from ament_index_python.packages import get_package_share_directory
 from gazebo_msgs.srv import SpawnEntity
 from tf_transformations import quaternion_from_euler
 
-SRC = "/home/dl/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/scripts/scenarios_unicycle/scenarios/"
-# YAML_FILE = 'formation4_mixed'
-# YAML_FILE = os.environ['YAML_NAME']
-TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
+SRC = get_package_share_directory('nebolab_gazebo_sim') + "/nebolab_gazebo_sim/scenarios_unicycle/scenarios/"
+TURTLEBOT3_MODEL = os.environ.get('TURTLEBOT3_MODEL', 'burger')
 
 def PyToGazConv(yaml_name):
     if not os.path.exists(f'{SRC}{yaml_name}.yml'):

@@ -26,12 +26,13 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
-TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
+TURTLEBOT3_MODEL = os.environ.get('TURTLEBOT3_MODEL','burger')
+os.environ['GAZEBO_MODEL_PATH'] = os.path.join(get_package_share_directory('nebolab_gazebo_sim'), 'models') + ":~/.gazebo/models"
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    world_file_name = 'empty_worlds/no_robot.model'
-    world = os.path.join(get_package_share_directory('turtlebot3_gazebo'),
+    world_file_name = 'empty_worlds/no_robot.world'
+    world = os.path.join(get_package_share_directory('nebolab_gazebo_sim'),
                          'worlds', world_file_name)
     launch_file_dir = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
