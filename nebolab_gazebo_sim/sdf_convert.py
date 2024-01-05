@@ -31,10 +31,12 @@ class converter(Node):
         super().__init__("sdf_converter")
         self.declare_parameter("yaml_name", "formation4_mixed")
         self.yaml_name = self.get_parameter("yaml_name").value
+        self.get_logger().info(self.yaml_name)
 
         if not os.path.exists(f'{src}{self.yaml_name}.yml'):
-            print(f"File {self.yaml_name} does not exist.")
+            self.get_logger().warning(f"File {self.yaml_name} does not exist. Defaulting to formation4_mixed.")
             self.yaml_name = "formation4_mixed"
+            
 
             
         self.get_logger().info(
@@ -97,7 +99,8 @@ class converter(Node):
             ''')
 
         self.get_logger().info(
-            'Modify environment file')
+            f'Modify environment file: {wld}/no_robot.model')
+        self.get_logger().info(f'{self.yaml_name}')
         with open(f'{wld}/no_robot.model', 'w') as file:
             file.write(f'''
             <?xml version="1.0"?>
@@ -160,10 +163,10 @@ class converter(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    pkg_root = get_package_share_directory('nebolab_gazebo_sim')
-    scenarios_path = pkg_root + "/nebolab_gazebo_sim/scenarios_unicycle/scenarios/"
-    models_path = pkg_root + "/models/"
-    worlds_path = pkg_root + "/worlds/empty_worlds"
+    pkg_share_dir = get_package_share_directory('nebolab_gazebo_sim')
+    scenarios_path = pkg_share_dir + "/nebolab_gazebo_sim/scenarios_unicycle/scenarios/"
+    models_path = pkg_share_dir + "/models/"
+    worlds_path = pkg_share_dir + "/worlds/empty_worlds"
     
     node = converter(src=scenarios_path, dst=models_path, wld=worlds_path)
     try:

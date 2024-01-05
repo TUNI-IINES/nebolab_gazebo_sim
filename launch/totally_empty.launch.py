@@ -27,7 +27,6 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 TURTLEBOT3_MODEL = os.environ.get('TURTLEBOT3_MODEL','burger')
-os.environ['GAZEBO_MODEL_PATH'] = os.path.join(get_package_share_directory('nebolab_gazebo_sim'), 'models') + ":~/.gazebo/models"
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')

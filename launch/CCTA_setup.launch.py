@@ -17,7 +17,6 @@
 # Authors: Darby Lim
 
 import os
-import sys
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from launch import LaunchDescription
@@ -25,44 +24,50 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import SetEnvironmentVariable
 
 
 def generate_launch_description():
-   DeclareLaunchArgument('yaml_name', default_value='formation4_mixed', 
-                         description='Name of the yaml file')
+    gazebo_env = SetEnvironmentVariable(
+        name="GAZEBO_MODEL_PATH",
+        value=os.path.join(get_package_share_directory("nebolab_gazebo_sim"), "models"),
+    )
 
-   
-   converter = Node(
-      package='nebolab_gazebo_sim',
-      executable='sdf_convert',
-      name='sdf_converter',
-      parameters=[{'yaml_name': LaunchConfiguration('yaml_name')}],
-      )
+    DeclareLaunchArgument(
+        "yaml_name",
+        default_value="formation4_mixed",
+        description="Name of the yaml file",
+    )
 
+    converter = Node(
+        package="nebolab_gazebo_sim",
+        executable="sdf_convert",
+        name="sdf_converter",
+        parameters=[{"yaml_name": LaunchConfiguration("yaml_name")}],
+    )
 
-   environment = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         get_package_share_directory('nebolab_gazebo_sim'), 'launch'),
-         '/totally_empty.launch.py'])
-      )
+    environment = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                os.path.join(
+                    get_package_share_directory("nebolab_gazebo_sim"), "launch"
+                ),
+                "/totally_empty.launch.py",
+            ]
+        )
+    )
 
-   spawn = Node(
-      package='nebolab_gazebo_sim',
-      executable='spawn_turtlebot',
-      name='entity_spawner',
-      parameters=[{'yaml_name': LaunchConfiguration('yaml_name')}],
-      )
-   
-   
-   vicon = Node(
-      package='nebolab_gazebo_sim',
-      executable='vicon_localization',
-      name='vicon_localization'
-      )
+    spawn = Node(
+        package="nebolab_gazebo_sim",
+        executable="spawn_turtlebot",
+        name="entity_spawner",
+        parameters=[{"yaml_name": LaunchConfiguration("yaml_name")}],
+    )
 
-   return LaunchDescription([
-      converter,
-      environment,
-      spawn,
-      vicon
-   ])
+    vicon = Node(
+        package="nebolab_gazebo_sim",
+        executable="vicon_localization",
+        name="vicon_localization",
+    )
+
+    return LaunchDescription([gazebo_env, converter, environment, spawn, vicon])
