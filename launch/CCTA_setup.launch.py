@@ -30,8 +30,6 @@ os.environ["GAZEBO_MODEL_PATH"] = os.path.join(get_package_share_directory("nebo
 
 
 def generate_launch_description():
-    print(os.environ["GAZEBO_MODEL_PATH"])
-
     DeclareLaunchArgument(
         "yaml_name",
         default_value="formation4_mixed",
