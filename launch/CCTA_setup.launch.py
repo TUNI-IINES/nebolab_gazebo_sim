@@ -24,14 +24,13 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.actions import SetEnvironmentVariable
+
+
+os.environ["GAZEBO_MODEL_PATH"] = os.path.join(get_package_share_directory("nebolab_gazebo_sim"), "models")
 
 
 def generate_launch_description():
-    gazebo_env = SetEnvironmentVariable(
-        name="GAZEBO_MODEL_PATH",
-        value=os.path.join(get_package_share_directory("nebolab_gazebo_sim"), "models"),
-    )
+    print(os.environ["GAZEBO_MODEL_PATH"])
 
     DeclareLaunchArgument(
         "yaml_name",
@@ -70,4 +69,4 @@ def generate_launch_description():
         name="vicon_localization",
     )
 
-    return LaunchDescription([gazebo_env, converter, environment, spawn, vicon])
+    return LaunchDescription([converter, environment, spawn, vicon])
