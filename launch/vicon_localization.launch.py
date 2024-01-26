@@ -11,6 +11,9 @@ def generate_launch_description():
                 package="nebolab_gazebo_sim",
                 executable="vicon_localization",
                 name="vicon_localization",
+                remappings=[
+                    ("/tb3_0/odom", "/odom"),
+                ]
             ),
         ]
     )

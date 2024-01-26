@@ -24,7 +24,7 @@ def generate_launch_description():
     world = os.path.join(
         pkg_nebolab_gazebo_sim,
         "worlds",
-        "example_world.world",
+        "empty_world.world",
     )
 
     # ----- END EDIT SECTION -----

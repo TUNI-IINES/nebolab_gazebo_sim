@@ -50,7 +50,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            "CCTA_GoToGoal = nebolab_gazebo_sim.CCTA_GoToGoal:main",
+            "CCTA_GoToGoal = nebolab_gazebo_sim.controller.CCTA_GoToGoal:main",
             "vicon_localization = nebolab_gazebo_sim.vicon_localization:main",
         ],
     },
