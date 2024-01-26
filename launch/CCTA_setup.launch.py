@@ -5,19 +5,6 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-<<<<<<< Updated upstream
-
-
-os.environ["GAZEBO_MODEL_PATH"] = os.path.join(get_package_share_directory("nebolab_gazebo_sim"), "models")
-
-
-def generate_launch_description():
-    DeclareLaunchArgument(
-        "yaml_name",
-        default_value="formation4_mixed",
-        description="Name of the yaml file",
-    )
-=======
 from launch.substitutions import LaunchConfiguration
 
 
@@ -41,7 +28,6 @@ def generate_launch_description():
     )
 
     # ----- END EDIT SECTION -----
->>>>>>> Stashed changes
 
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -74,9 +60,6 @@ def generate_launch_description():
         launch_arguments={"x_pose": x_pose, "y_pose": y_pose}.items(),
     )
 
-<<<<<<< Updated upstream
-    return LaunchDescription([converter, environment, spawn, vicon])
-=======
     vicon_fake_localization_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_nebolab_gazebo_sim,"launch", "vicon_localization.launch.py")
@@ -93,4 +76,3 @@ def generate_launch_description():
     ld.add_action(vicon_fake_localization_cmd)
 
     return ld
->>>>>>> Stashed changes
