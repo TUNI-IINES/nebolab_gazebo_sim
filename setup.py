@@ -3,8 +3,6 @@ from glob import glob
 from setuptools import setup
 
 package_name = "nebolab_gazebo_sim"
-control_lib = "nebolab_gazebo_sim/control_lib"
-scenarios = "nebolab_gazebo_sim/scenarios_unicycle"
 simulator = "nebolab_gazebo_sim/simulator"
 data_files = [
     ("share/" + package_name, ["package.xml"]),
@@ -39,7 +37,7 @@ setup(
     packages=[package_name, simulator],
     data_files=package_files(
         data_files,
-        ["launch/", "worlds/"],
+        ["launch/", "worlds/", "models/", "scenarios/"],
     ),
     install_requires=["setuptools"],
     zip_safe=True,
@@ -52,6 +50,7 @@ setup(
         "console_scripts": [
             "CCTA_GoToGoal = nebolab_gazebo_sim.controller.CCTA_GoToGoal:main",
             "vicon_localization = nebolab_gazebo_sim.vicon_localization:main",
+            "yaml_to_world = nebolab_gazebo_sim.yaml_to_world:main",
         ],
     },
 )

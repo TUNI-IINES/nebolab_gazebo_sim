@@ -12,6 +12,7 @@ def generate_launch_description():
     pkg_turtlebot3_gazebo = get_package_share_directory("turtlebot3_gazebo")
     pkg_gazebo_ros = get_package_share_directory("gazebo_ros")
     pkg_nebolab_gazebo_sim = get_package_share_directory("nebolab_gazebo_sim")
+    worlds = os.path.join(pkg_nebolab_gazebo_sim, "worlds")
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
 
     # ----- EDIT THIS SECTION -----
@@ -21,11 +22,7 @@ def generate_launch_description():
     y_pose = LaunchConfiguration("y_pose", default="0.0")
 
     # Edit this world file name to change which world file to load
-    world = os.path.join(
-        pkg_nebolab_gazebo_sim,
-        "worlds",
-        "empty_world.world",
-    )
+    world = os.path.join(worlds, "example_scenario.world")
 
     # ----- END EDIT SECTION -----
 

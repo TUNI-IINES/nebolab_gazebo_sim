@@ -1,0 +1,6 @@
+scenario:
+  obstacles:
+    # Each line describes an obstacle (closed polygon: the last vertex should be the same as the first).
+    # [x,y,z] describes coordinates of the vertices of the polygon. Z is (almost) always 0.0.
+    - [ [ 1.0, 1.0, 0.0 ], [ 4.0, 1.0, 0.0 ], [ 3.0, 0.5, 0.0 ], [ 2.0, 0.5, 0.0 ], [ 1.0, 1.0, 0.0 ] ]
+    - [ [ 1.0, -1.0, 0.0 ], [ 4.0, -1.0, 0.0 ], [ 3.0, -0.5, 0.0 ], [ 2.0, -0.5, 0.0 ], [ 1.0, -1.0, 0.0 ] ]
