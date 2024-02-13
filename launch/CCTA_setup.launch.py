@@ -22,7 +22,7 @@ def generate_launch_description():
     y_pose = LaunchConfiguration("y_pose", default="0.0")
 
     # Edit this world file name to change which world file to load
-    world = os.path.join(worlds, "example_scenario.world")
+    world = os.path.join(worlds, "empty_world.world")
 
     # ----- END EDIT SECTION -----
 
